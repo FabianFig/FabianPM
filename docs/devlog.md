@@ -75,3 +75,41 @@ every 50 ms, giving a target sample rate of 20 Hz.
 The first saved capture contained 249 samples over approximately 12.4 seconds.
 The measured average sample rate was about 19.95 Hz.
 The next step is to compare the raw ADC signal with basic filtering.
+
+### Moving-average filtering
+
+The first captured ADC dataset was used to compare several simple moving-average filters.
+
+The raw signal had a standard deviation of:
+
+```text
+0.0155 V
+```
+
+I then calculated moving averages over three window sizes:
+
+```text
+5 samples
+10 samples
+20 samples
+```
+
+At the measured sampling rate of approximately 19.95 Hz, these represent roughly:
+
+```text
+5 samples  ≈ 0.25 s
+10 samples ≈ 0.50 s
+20 samples ≈ 1.00 s
+```
+
+The measured standard deviations were:
+
+```text
+Raw:        0.0155 V
+5-sample:   0.0065 V
+10-sample:  0.0038 V
+20-sample:  0.0023 V
+```
+
+he larger averaging windows visibly smoothed the signal and reduced measured variation.
+And because the resistor-divider input was essentially static, this experiment mainly shows noise reduction. A changing input will needed to show the response-time penalty introduced by larger moving-average windows.

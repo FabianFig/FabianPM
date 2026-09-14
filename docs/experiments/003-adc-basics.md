@@ -133,4 +133,52 @@ minimum:     1.633 V
 maximum:     1.688 V
 ```
 
-The next step would be to compare the raw signal with a simple moving-average filter.
+## Moving-average comparison
+
+The saved dataset was also used to test simple moving-average filtering.
+
+Three window sizes were compared against the raw signal:
+
+```text
+5 samples
+10 samples
+20 samples
+```
+
+At the measured sampling rate of 19.95 Hz, the approximate averaging periods were:
+
+```text
+5 samples  ≈ 0.25 s
+10 samples ≈ 0.50 s
+20 samples ≈ 1.00 s
+```
+
+The raw voltage standard deviation was:
+
+```text
+0.0155 V
+```
+
+After filtwering:
+
+```text
+5-sample moving average:   0.0065 V
+10-sample moving average:  0.0038 V
+20-sample moving average:  0.0023 V
+```
+
+Relative to the raw signal, the standard deviation was reduced by approximately:
+
+```text
+5-sample:   58%
+10-sample:  75%
+20-sample:  85%
+```
+
+The larger windows produced progressively smoother traces.
+
+![ADC moving-average comparison](../images/adc_moving_average_comparison.png)
+
+This capture used a nearly constant input, so it does not yet show the main tradeoff of moving-average filtering: larger windows reduce noise but respond more slowly to real changes in the signal.
+
+The next experiment will use a variable analog input to make that lag measurable.

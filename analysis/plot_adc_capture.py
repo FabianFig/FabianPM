@@ -7,7 +7,9 @@ import pandas as pd
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DATA_FILE = PROJECT_ROOT / "data" / "adc_capture.csv"
 
-MOVING_AVERAGE_WINDOW = 5
+MOVING_AVERAGE_WINDOW_5_SAMPLE = 5
+MOVING_AVERAGE_WINDOW_10_SAMPLE = 10
+MOVING_AVERAGE_WINDOW_20_SAMPLE = 20
 
 
 def main():
@@ -24,10 +26,22 @@ def main():
 
     intervals_ms = df["time_ms"].diff().dropna()
 
-    # averageing each sample with the four measurements before it.
-    df["voltage_filtered_v"] = (
+    # Calculating moving average over several window sizes
+    df["voltage_filtered_5"] = (
         df["voltage_v"]
-        .rolling(window=MOVING_AVERAGE_WINDOW)
+        .rolling(window=MOVING_AVERAGE_WINDOW_5_SAMPLE)
+        .mean()
+    )
+
+    df["voltage_filtered_10"] = (
+        df["voltage_v"]
+        .rolling(window=MOVING_AVERAGE_WINDOW_10_SAMPLE)
+        .mean()
+    )
+    
+    df["voltage_filtered_20"] = (
+        df["voltage_v"]
+        .rolling(window=MOVING_AVERAGE_WINDOW_20_SAMPLE)
         .mean()
     )
 
@@ -52,7 +66,18 @@ def main():
 
     print()
     print("Filtered voltage")
-    print(f"  Std dev: {df['voltage_filtered_v'].std():.4f} V")
+    print(
+        f"  5-sample std dev: "
+        f"{df['voltage_filtered_5'].std():.4f} V"
+    )
+    print(
+        f"  10-sample std dev: "
+        f"{df['voltage_filtered_10'].std():.4f} V"
+    )
+    print(
+        f"  20-sample std dev: "
+        f"{df['voltage_filtered_20'].std():.4f} V"
+    )
 
     plt.figure(figsize=(10, 5))
 
@@ -65,11 +90,25 @@ def main():
 
     plt.plot(
         df["time_s"],
-        df["voltage_filtered_v"],
-        linewidth=2,
-        label=f"{MOVING_AVERAGE_WINDOW}-sample moving average",
+        df["voltage_filtered_5"],
+        linewidth=1.5,
+        label="5-sample moving average",
     )
 
+    plt.plot(
+        df["time_s"],
+        df["voltage_filtered_10"],
+        linewidth=1.5,
+        label="10-sample moving average",
+    )
+
+    plt.plot(
+        df["time_s"],
+        df["voltage_filtered_20"],
+        linewidth=2,
+        label="20-sample moving average",
+    )
+    
     plt.xlabel("Time (s)")
     plt.ylabel("Voltage (V)")
     plt.title("FabianPM - Pico ADC capture")
