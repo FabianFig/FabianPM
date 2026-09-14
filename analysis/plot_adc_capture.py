@@ -5,7 +5,7 @@ import pandas as pd
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-DATA_FILE = PROJECT_ROOT / "data" / "adc_capture.csv"
+DATA_FILE = PROJECT_ROOT / "data" / "exp003_static_divider.csv"
 
 MOVING_AVERAGE_WINDOW_5_SAMPLE = 5
 MOVING_AVERAGE_WINDOW_10_SAMPLE = 10

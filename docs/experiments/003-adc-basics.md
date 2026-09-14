@@ -177,7 +177,7 @@ Relative to the raw signal, the standard deviation was reduced by approximately:
 
 The larger windows produced progressively smoother traces.
 
-![ADC moving-average comparison](../images/adc_moving_average_comparison.png)
+![ADC moving-average comparison](../images/exp003_moving_average_comparison.png)
 
 This capture used a nearly constant input, so it does not yet show the main tradeoff of moving-average filtering: larger windows reduce noise but respond more slowly to real changes in the signal.
 
