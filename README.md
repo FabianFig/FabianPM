@@ -8,10 +8,11 @@ I am using the project to learn embedded development, instrumentation, signal pr
 I compared the raw signal against 5-sample, 10-sample, and 20-sample moving averages.
 The measured standard deviation decreased to:
 
-````text
+```text
 5-sample:   0.0065 V
 10-sample:  0.0038 V
 20-sample:  0.0023 V
+```
 
 ### ADC filtering experiment
 
@@ -25,6 +26,7 @@ The measured capture contained:
 19.95 Hz average sample rate
 1.6638 V mean voltage
 0.0155 V raw standard deviation
+```
 
 ## Current progress
 
@@ -35,4 +37,4 @@ The measured capture contained:
 - Verified ADC response at ground, approximately 1.65 V, and 3.3 V
 - Captured the first timestamped 20 Hz ADC dataset
 - Started Python analysis of captured data
-````
+
