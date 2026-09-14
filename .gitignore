@@ -1,0 +1,17 @@
+# Python
+analysis/.venv/
+__pycache__/
+*.pyc
+
+# Pico/CMake build output
+**/build/
+*.uf2
+*.elf
+*.bin
+*.hex
+*.map
+*.dis
+
+# Editor / OS
+.vscode/
+.DS_Store
