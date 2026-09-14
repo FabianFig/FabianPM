@@ -1,17 +1,29 @@
-# FabianPM
 
-FabianPM is a DIY bicycle crank power meter built around a Raspberry Pi Pico W.
+## First ADC capture
 
-The goal is to measure crank torque using strain gauges, combine it with crank angular velocity, and eventually broadcast power data to a bike computer over BLE or ANT+.
+The first saved ADC capture used a two-resistor divider to generate approximately 1.65 V at GPIO26.
 
-I am using the project to learn embedded development, instrumentation, signal processing, and the practical hardware involved in measuring very small strain signals.
+The Pico sampled the ADC at a target rate of 20 Hz and streamed timestamped measurements over USB serial.
 
-## Current progress
+The first capture contained:
 
-- Raspberry Pi Pico W C/C++ toolchain running on Arch Linux
-- Built and flashed first firmware
-- USB serial communication working
-- ADC measurements working on GPIO26/ADC0
-- Verified ADC response at ground, approximately 1.65 V, and 3.3 V
-- Captured the first timestamped 20 Hz ADC dataset
-- Started Python analysis of captured data
+```text
+249 samples
+12.429 s duration
+19.95 Hz measured average sample rate
+1.6638 V mean measured voltage
+```
+
+![First Pico ADC capture](docs/images/prior_adc_capture.png)
+
+The analysis script used to generate the plot is in:
+
+```text
+analysis/plot_adc_capture.py
+```
+
+The source data is in:
+
+```text
+data/adc_capture.csv
+```
